@@ -1,5 +1,6 @@
-import { useDeferredValue, useState } from "react"
+import { useDeferredValue } from "react"
 import useSWR from "swr"
+import { Link, useLocation } from "wouter"
 
 interface Todo {
   completed: boolean
@@ -9,7 +10,9 @@ interface Todo {
 }
 
 export function App() {
-  const [currentPage, setCurrentPage] = useState(1)
+  const params = useLocationSearch()
+
+  const currentPage = parseInt(params.get("page") as any) || 1
   const deferredPage = useDeferredValue(currentPage)
   const pending = currentPage !== deferredPage
 
@@ -26,18 +29,18 @@ export function App() {
           const current = page === currentPage
 
           return (
-            <button
-              key={page}
-              type="button"
-              onClick={() => {
-                setCurrentPage(page)
-              }}
-              style={{
-                backgroundColor: current ? "var(--focus)" : undefined,
-              }}
-            >
-              {page}
-            </button>
+            <Link key={page} to={`?page=${page}`}>
+              <a>
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor: current ? "var(--focus)" : undefined,
+                  }}
+                >
+                  {page}
+                </button>
+              </a>
+            </Link>
           )
         })}
       </div>
@@ -71,4 +74,10 @@ export function App() {
       </table>
     </div>
   )
+}
+
+function useLocationSearch(): URLSearchParams {
+  useLocation()
+
+  return new URLSearchParams(globalThis.location.search)
 }
