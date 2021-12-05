@@ -8,8 +8,7 @@
     "url": "https://github.com/kazuma1989/react-vs-template-engine"
   },
   "scripts": {
-    "start": "vite serve",
-    "build": "vite build"
+    "start": "vite serve"
   },
   "dependencies": {
     "@vitejs/plugin-react": "1.1.0",

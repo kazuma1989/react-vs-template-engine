@@ -8,8 +8,7 @@
     "url": "https://github.com/kazuma1989/react-vs-template-engine"
   },
   "scripts": {
-    "start": "node -r tsm ./src/index.ts",
-    "build": "echo \"Error: build command is not implemented\" && exit 1"
+    "start": "node -r tsm ./src/index.ts"
   },
   "dependencies": {
     "handlebars": "4.7.x",
