@@ -8,12 +8,17 @@
     "url": "https://github.com/kazuma1989/react-vs-template-engine"
   },
   "scripts": {
-    "start": "vite serve",
-    "build": "vite build"
+    "start": "node -r tsm ./src/server.ts",
+    "build": "echo \"Error: build command is not implemented\" && exit 1"
   },
   "dependencies": {
+    "mustache": "4.2.x",
+    "polka": "0.5.x",
+    "tsm": "2.2.x"
   },
   "devDependencies": {
+    "@types/mustache": "4.1.x",
+    "@types/polka": "0.5.x",
     "typescript": "4.5.x"
   }
 }
