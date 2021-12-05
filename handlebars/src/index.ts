@@ -26,7 +26,7 @@ app.get("/", async (req, res) => {
 
   const template = await template$
 
-  const currentPage = parseInt(req.query.page as string)
+  const currentPage = parseInt(req.query.page as string) || 1
   const todos = await fetch(
     `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
   ).then((r) => r.json())

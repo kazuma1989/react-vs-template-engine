@@ -19,7 +19,7 @@ export function App() {
 
   return (
     <div>
-      <h1>React 18 Example</h1>
+      <h1>React Example</h1>
 
       <div>
         {[1, 2, 3, 4, 5].map((page) => {
