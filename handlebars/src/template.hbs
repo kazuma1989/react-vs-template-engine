@@ -2,6 +2,18 @@
 <div>
   <h1>React 18 Example</h1>
 
+  <div>
+    {{#each pages}}
+      <button type="button" style="background-color: var(--focus);">
+        {{.}}
+      </button>
+    {{/each}}
+  </div>
+
+  <progress style="visibility: hidden;" }>
+    Loading...
+  </progress>
+
   <table style="table-layout: auto;">
     <thead>
       <tr>
@@ -14,10 +26,10 @@
     <tbody>
       {{#each todos}}
         <tr>
-          <td>{{this.id}}</td>
-          <td>{{this.title}}</td>
+          <td>{{id}}</td>
+          <td>{{title}}</td>
           <td>
-            {{#if this.completed}} YES {{else}} NO {{/if}}
+            {{#if completed}} YES {{else}} NO {{/if}}
           </td>
         </tr>
       {{/each}}

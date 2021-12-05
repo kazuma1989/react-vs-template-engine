@@ -60,7 +60,7 @@ function App() {
                 setCurrentPage(page)
               }}
               style={{
-                background: current ? "var(--focus)" : undefined,
+                backgroundColor: current ? "var(--focus)" : undefined,
               }}
             >
               {page}

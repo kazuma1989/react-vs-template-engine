@@ -30,7 +30,7 @@ app.get("/", async (req, res) => {
     `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${page}`
   ).then((r) => r.json())
 
-  const output = template({ todos })
+  const output = template({ pages: [1, 2, 3, 4, 5], todos })
 
   res.setHeader("Content-Type", "text/html")
   res.end(output)
