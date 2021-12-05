@@ -1,16 +1,21 @@
-{{#> layout }}
+{{#> layout}}
 <div>
   <h1>React 18 Example</h1>
 
   <div>
     {{#each pages}}
-      <button type="button" style="background-color: var(--focus);">
-        {{.}}
-      </button>
+      <a href="?page={{page}}"><button
+          type="button"
+          {{#if current}}style="background-color: var(--focus);"{{/if}}
+        >
+          {{page}}
+        </button></a>
     {{/each}}
   </div>
 
-  <progress style="visibility: hidden;" }>
+  {{! つねに visibility=hidden になってしまう。 }}
+  {{! React 版と揃えるため要素は残してある。 }}
+  <progress style="visibility: hidden;">
     Loading...
   </progress>
 
