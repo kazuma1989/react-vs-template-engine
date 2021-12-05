@@ -11,7 +11,7 @@
     "start": "vite serve"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "1.1.0",
+    "@vitejs/plugin-react": "1.1.x",
     "react": "18.0.0-beta-4729ff6d1-20211202",
     "react-dom": "18.0.0-beta-4729ff6d1-20211202",
     "swr": "1.1.x",
