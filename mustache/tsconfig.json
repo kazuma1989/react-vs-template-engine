@@ -1,0 +1,12 @@
+// https://www.typescriptlang.org/ja/tsconfig
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+
+  // src フォルダーだけを対象にする。
+  "include": ["./src/**/*"],
+
+  "compilerOptions": {
+    // インデックスアクセスは null チェックが必要。
+    "noUncheckedIndexedAccess": true
+  }
+}

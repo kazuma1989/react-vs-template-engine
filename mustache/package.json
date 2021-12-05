@@ -17,6 +17,7 @@
     "tsm": "2.2.x"
   },
   "devDependencies": {
+    "@tsconfig/node16": "1.0.x",
     "@types/mustache": "4.1.x",
     "@types/polka": "0.5.x",
     "typescript": "4.5.x"
