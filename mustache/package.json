@@ -12,13 +12,12 @@
     "build": "echo \"Error: build command is not implemented\" && exit 1"
   },
   "dependencies": {
-    "mustache": "4.2.x",
+    "handlebars": "4.7.x",
     "polka": "0.5.x",
     "tsm": "2.2.x"
   },
   "devDependencies": {
     "@tsconfig/node16": "1.0.x",
-    "@types/mustache": "4.1.x",
     "@types/polka": "0.5.x",
     "typescript": "4.5.x"
   }

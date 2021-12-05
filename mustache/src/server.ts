@@ -1,4 +1,4 @@
-import Mustache from "mustache"
+import Handlebars from "handlebars"
 import polka from "polka"
 
 const app = polka().listen(3000, (err: unknown) => {
@@ -8,12 +8,14 @@ const app = polka().listen(3000, (err: unknown) => {
 })
 
 app.get("/users/:id", (req, res) => {
+  const template = Handlebars.compile("{{title}} spends {{calc}}")
+
   const view = {
     title: req.params.id,
     calc: () => 2 + 4,
   }
 
-  const output = Mustache.render("{{title}} spends {{calc}}", view)
+  const output = template(view)
 
   res.end(output)
 })
