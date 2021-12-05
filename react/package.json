@@ -1,0 +1,32 @@
+{
+  "name": "trial-react-18",
+  "version": "0.0.0",
+  "author": "Kazuma Ebina <kazuma1989@quipper.com>",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kazuma1989/trial-react-18"
+  },
+  "engines": {
+    "node": ">=12.17.0",
+    "npm": ">=6.14.4"
+  },
+  "scripts": {
+    "start": "vite serve",
+    "build": "vite build",
+    "format": "prettier --write \"./src/**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "1.0.5",
+    "react": "18.0.0-alpha-02f411578-20211019",
+    "react-dom": "18.0.0-alpha-02f411578-20211019",
+    "swr": "1.0.x",
+    "vite": "2.6.x"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.x",
+    "@types/react-dom": "17.0.x",
+    "prettier": "2.4.x",
+    "typescript": "4.4.x"
+  }
+}
