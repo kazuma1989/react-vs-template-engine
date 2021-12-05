@@ -4,10 +4,11 @@ import fetch from "node-fetch"
 import path from "path"
 import polka from "polka"
 
-const app = polka().listen(3000, (err: unknown) => {
+const port = 5006
+const app = polka().listen(port, (err: unknown) => {
   if (err) throw err
 
-  console.log(`> Running on localhost:3000`)
+  console.log(`> Running on localhost:${port}`)
 })
 
 const setup$ = Promise.all([
