@@ -2,10 +2,26 @@
 <div>
   <h1>React 18 Example</h1>
 
-  <ul>
-    {{#each todos}}
-      <li>{{this.title}}</li>
-    {{/each}}
-  </ul>
+  <table style="table-layout: auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>COMPLETED</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each todos}}
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.title}}</td>
+          <td>
+            {{#if this.completed}} YES {{else}} NO {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>
 {{/layout}}
