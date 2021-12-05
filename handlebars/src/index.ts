@@ -26,6 +26,8 @@ app.get("/", async (req, res) => {
 
   const template = await template$
 
+  await fakeDelay(1_000)
+
   const currentPage = parseInt(req.query.page as string) || 1
   const todos = await fetch(
     `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
@@ -42,3 +44,9 @@ app.get("/", async (req, res) => {
   res.setHeader("Content-Type", "text/html")
   res.end(output)
 })
+
+function fakeDelay(ms: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
+}
