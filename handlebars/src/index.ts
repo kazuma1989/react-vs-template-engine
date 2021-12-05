@@ -1,5 +1,6 @@
 import fs from "fs/promises"
 import Handlebars from "handlebars"
+import fetch from "node-fetch"
 import path from "path"
 import polka from "polka"
 
@@ -22,13 +23,14 @@ const template$ = fs
 app.get("/users/:id", async (req, res) => {
   await setup$
 
-  const view = {
-    title: req.params.id,
-    calc: () => 2 + 4,
-  }
-
   const template = await template$
-  const output = template(view)
+
+  const page = 1
+  const todos = await fetch(
+    `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${page}`
+  ).then((r) => r.json())
+
+  const output = template({ todos })
 
   res.setHeader("Content-Type", "text/html")
   res.end(output)

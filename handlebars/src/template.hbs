@@ -1,5 +1,11 @@
 {{#> layout }}
 <div>
   <h1>React 18 Example</h1>
+
+  <ul>
+    {{#each todos}}
+      <li>{{this.title}}</li>
+    {{/each}}
+  </ul>
 </div>
 {{/layout}}
