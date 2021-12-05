@@ -17,7 +17,7 @@ const setup$ = Promise.all([
 ])
 
 const template$ = fs
-  .readFile(path.resolve(__dirname, "./template.hbs"), "utf-8")
+  .readFile(path.resolve(__dirname, "./index.hbs"), "utf-8")
   .then(Handlebars.compile)
 
 app.get("/", async (req, res) => {
