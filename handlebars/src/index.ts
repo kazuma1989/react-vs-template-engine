@@ -20,7 +20,7 @@ const template$ = fs
   .readFile(path.resolve(__dirname, "./template.hbs"), "utf-8")
   .then(Handlebars.compile)
 
-app.get("/users/:id", async (req, res) => {
+app.get("/", async (req, res) => {
   await setup$
 
   const template = await template$
