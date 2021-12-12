@@ -1,8 +1,8 @@
 import fs from "fs/promises"
 import Handlebars from "handlebars"
-import fetch from "node-fetch"
 import path from "path"
 import polka from "polka"
+import { app } from "./app"
 
 run()
 
@@ -11,34 +11,17 @@ async function run(): Promise<void> {
     .readFile(path.resolve(__dirname, "./layout.hbs"), "utf-8")
     .then((source) => Handlebars.registerPartial("layout", source))
 
-  const app = polka()
+  const server = polka()
 
-  app.get("/", async (req, res) => {
-    const template = await fs
-      .readFile(path.resolve(__dirname, "./index.hbs"), "utf-8")
-      .then(Handlebars.compile)
-
+  server.get("/", async (req, res) => {
     await fakeDelay(1_000)
 
-    const currentPage = parseInt(req.query.page as string) || 1
-    const todos = await fetch(
-      `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
-    ).then((r) => r.json())
-
-    const output = template({
-      pages: [1, 2, 3, 4, 5].map((page) => ({
-        page,
-        current: page === currentPage,
-      })),
-      todos,
-    })
-
     res.setHeader("Content-Type", "text/html")
-    res.end(output)
+    res.end(await app(req.query))
   })
 
   const port = 5006
-  app.listen(port, (err: unknown) => {
+  server.listen(port, (err: unknown) => {
     if (err) throw err
 
     console.log(`> Running on localhost:${port}`)
