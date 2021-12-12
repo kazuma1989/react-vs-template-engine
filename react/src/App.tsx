@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface Todo {
   completed: boolean
@@ -13,9 +13,13 @@ export function App(): JSX.Element {
   const currentPage = parseInt(params.get("page") as string) || 1
 
   const [todos, setTodos] = useState<Todo[] | "LOADING">("LOADING")
+  const called$ = useRef(false)
 
   useEffect(() => {
     ;(async () => {
+      if (called$.current) return
+      called$.current = true
+
       await fakeDelay(1_000)
 
       const todos = await fetch(
