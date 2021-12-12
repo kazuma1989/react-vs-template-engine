@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import useSWR from "swr"
 
 interface Todo {
   completed: boolean
@@ -11,13 +11,9 @@ export function App(): JSX.Element {
   const params = new URLSearchParams(globalThis.location.search)
 
   const currentPage = parseInt(params.get("page") as string) || 1
-  const todos = useAPIData<Todo[]>(
+  const todos: Todo[] = useSWR(
     `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
-  )
-
-  if (todos === "LOADING") {
-    return <progress>Loading...</progress>
-  }
+  ).data
 
   return (
     <div>
@@ -62,30 +58,4 @@ export function App(): JSX.Element {
       </table>
     </div>
   )
-}
-
-function useAPIData<R>(url: string): R | "LOADING" {
-  const [data, setData] = useState<R | "LOADING">("LOADING")
-  const called$ = useRef(false)
-
-  useEffect(() => {
-    ;(async () => {
-      if (called$.current) return
-      called$.current = true
-
-      await fakeDelay(1_000)
-
-      const data = await fetch(url).then((r) => r.json())
-
-      setData(data)
-    })()
-  }, [])
-
-  return data
-}
-
-function fakeDelay(ms: number) {
-  return new Promise<void>((resolve) => {
-    setTimeout(resolve, ms)
-  })
 }
