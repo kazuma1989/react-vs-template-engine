@@ -1,4 +1,4 @@
-import useSWR from "swr"
+import { useEffect, useState } from "react"
 
 interface Todo {
   completed: boolean
@@ -7,13 +7,24 @@ interface Todo {
   userId: number
 }
 
-export function App() {
+export function App(): JSX.Element {
   const params = new URLSearchParams(globalThis.location.search)
 
   const currentPage = parseInt(params.get("page") as string) || 1
-  const todos: Todo[] = useSWR(
-    `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
-  ).data
+
+  const [todos, setTodos] = useState<Todo[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      await fakeDelay(1_000)
+
+      const todos = await fetch(
+        `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
+      ).then((r) => r.json())
+
+      setTodos(todos)
+    })()
+  }, [])
 
   return (
     <div>
@@ -58,4 +69,10 @@ export function App() {
       </table>
     </div>
   )
+}
+
+function fakeDelay(ms: number) {
+  return new Promise<void>((resolve) => {
+    setTimeout(resolve, ms)
+  })
 }
