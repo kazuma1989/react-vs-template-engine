@@ -11,24 +11,9 @@ export function App(): JSX.Element {
   const params = new URLSearchParams(globalThis.location.search)
 
   const currentPage = parseInt(params.get("page") as string) || 1
-
-  const [todos, setTodos] = useState<Todo[] | "LOADING">("LOADING")
-  const called$ = useRef(false)
-
-  useEffect(() => {
-    ;(async () => {
-      if (called$.current) return
-      called$.current = true
-
-      await fakeDelay(1_000)
-
-      const todos = await fetch(
-        `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
-      ).then((r) => r.json())
-
-      setTodos(todos)
-    })()
-  }, [])
+  const todos = useAPIData<Todo[]>(
+    `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
+  )
 
   if (todos === "LOADING") {
     return <progress>Loading...</progress>
@@ -77,6 +62,26 @@ export function App(): JSX.Element {
       </table>
     </div>
   )
+}
+
+function useAPIData<R>(url: string): R | "LOADING" {
+  const [data, setData] = useState<R | "LOADING">("LOADING")
+  const called$ = useRef(false)
+
+  useEffect(() => {
+    ;(async () => {
+      if (called$.current) return
+      called$.current = true
+
+      await fakeDelay(1_000)
+
+      const data = await fetch(url).then((r) => r.json())
+
+      setData(data)
+    })()
+  }, [])
+
+  return data
 }
 
 function fakeDelay(ms: number) {
