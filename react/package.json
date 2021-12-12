@@ -12,11 +12,10 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "1.1.x",
-    "react": "18.0.0-beta-4729ff6d1-20211202",
-    "react-dom": "18.0.0-beta-4729ff6d1-20211202",
+    "react": "18.0.0-beta-24dd07bd2-20211208",
+    "react-dom": "18.0.0-beta-24dd07bd2-20211208",
     "swr": "1.1.x",
-    "vite": "2.6.x",
-    "wouter": "2.7.x"
+    "vite": "2.7.x"
   },
   "devDependencies": {
     "@tsconfig/vite-react": "1.0.x",
