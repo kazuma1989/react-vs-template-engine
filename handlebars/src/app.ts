@@ -7,7 +7,7 @@ import { Polka } from "polka"
 type Query = Parameters<Parameters<Polka["get"]>[1]>[0]["query"]
 
 const template$ = fs
-  .readFile(path.resolve(__dirname, "./index.hbs"), "utf-8")
+  .readFile(path.resolve(__dirname, "./app.hbs"), "utf-8")
   .then(Handlebars.compile)
 
 export async function app(query: Query): Promise<string> {
