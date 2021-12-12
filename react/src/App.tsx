@@ -9,7 +9,7 @@ interface Todo {
 
 export function App() {
   const params = new URLSearchParams(globalThis.location.search)
-  const currentPage = parseInt(params.get("page") as any) || 1
+  const currentPage = parseInt(params.get("page") as string) || 1
 
   const todos: Todo[] = useSWR(
     `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
