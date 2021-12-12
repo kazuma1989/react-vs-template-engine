@@ -2,22 +2,17 @@
 <div>
   <h1>Handlebars Example</h1>
 
-  <div>
+  <div style="display: flex; gap: 8px">
     {{#each pages}}
-      <a href="?page={{page}}"><button
-          type="button"
-          {{#if current}} style="background-color: var(--focus)" {{/if}}
-        >
+      <a href="?page={{page}}" style="padding: 8px">
+        {{#if current}}
+          <b><u>{{page}}</u></b>
+        {{else}}
           {{page}}
-        </button></a>
+        {{/if}}
+      </a>
     {{/each}}
   </div>
-
-  {{! つねに visibility=hidden になってしまう。 }}
-  {{! React 版と揃えるため要素は残してある。 }}
-  <progress style="visibility: hidden">
-    Loading...
-  </progress>
 
   <table style="table-layout: auto">
     <thead>

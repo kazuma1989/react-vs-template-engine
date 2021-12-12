@@ -1,6 +1,4 @@
-import { useDeferredValue } from "react"
 import useSWR from "swr"
-import { Link, useLocation } from "wouter"
 
 interface Todo {
   completed: boolean
@@ -10,44 +8,34 @@ interface Todo {
 }
 
 export function App() {
-  const params = useLocationSearch()
-
+  const params = new URLSearchParams(globalThis.location.search)
   const currentPage = parseInt(params.get("page") as any) || 1
-  const deferredPage = useDeferredValue(currentPage)
-  const pending = currentPage !== deferredPage
 
   const todos: Todo[] = useSWR(
-    `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${deferredPage}`
+    `https://jsonplaceholder.typicode.com/todos?_limit=10&_page=${currentPage}`
   ).data
 
   return (
     <div>
       <h1>React Example</h1>
 
-      <div>
+      <div style={{ display: "flex", gap: 8 }}>
         {[1, 2, 3, 4, 5].map((page) => {
           const current = page === currentPage
 
           return (
-            <Link key={page} to={`?page=${page}`}>
-              <a>
-                <button
-                  type="button"
-                  style={{
-                    backgroundColor: current ? "var(--focus)" : undefined,
-                  }}
-                >
-                  {page}
-                </button>
-              </a>
-            </Link>
+            <a key={page} href={`?page=${page}`} style={{ padding: 8 }}>
+              {current ? (
+                <b>
+                  <u>{page}</u>
+                </b>
+              ) : (
+                page
+              )}
+            </a>
           )
         })}
       </div>
-
-      <progress style={{ visibility: pending ? "visible" : "hidden" }}>
-        Loading...
-      </progress>
 
       <table
         style={{
@@ -74,10 +62,4 @@ export function App() {
       </table>
     </div>
   )
-}
-
-function useLocationSearch(): URLSearchParams {
-  useLocation()
-
-  return new URLSearchParams(globalThis.location.search)
 }
