@@ -12,7 +12,7 @@ export function App(): JSX.Element {
 
   const currentPage = parseInt(params.get("page") as string) || 1
 
-  const [todos, setTodos] = useState<Todo[]>([])
+  const [todos, setTodos] = useState<Todo[] | "LOADING">("LOADING")
 
   useEffect(() => {
     ;(async () => {
@@ -25,6 +25,10 @@ export function App(): JSX.Element {
       setTodos(todos)
     })()
   }, [])
+
+  if (todos === "LOADING") {
+    return <progress>Loading...</progress>
+  }
 
   return (
     <div>
