@@ -37,11 +37,7 @@ export function App() {
         })}
       </div>
 
-      <table
-        style={{
-          tableLayout: "auto",
-        }}
-      >
+      <table style={{ tableLayout: "auto" }}>
         <thead>
           <tr>
             <th>ID</th>
